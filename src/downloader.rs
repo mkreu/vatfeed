@@ -26,7 +26,7 @@ impl Downloader {
 
     pub async fn download(&mut self) -> Result<Datafeed, DatafeedError> {
         let status = Self::get_or_update_status(&mut self.status, &self.client).await?;
-        Self::download_json(&self.client, status.data.v3.first().unwrap())
+        Self::download_json(&self.client, status.data.v3.first().ok_or(DatafeedError::NoUrlError())?)
             .await
             .map_err(DatafeedError::DatafeedHttpError)
     }
@@ -58,6 +58,8 @@ impl Downloader {
 
 #[derive(Error, Debug)]
 pub enum DatafeedError {
+    #[error("The status file does not contain any url")]
+    NoUrlError(),
     #[error("Failed to download status file")]
     StatusHttpError(reqwest::Error),
     #[error("Failed to download datafeed")]

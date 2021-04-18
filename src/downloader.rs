@@ -26,9 +26,12 @@ impl Downloader {
 
     pub async fn download(&mut self) -> Result<Datafeed, DatafeedError> {
         let status = Self::get_or_update_status(&mut self.status, &self.client).await?;
-        Self::download_json(&self.client, status.data.v3.first().ok_or(DatafeedError::NoUrlError())?)
-            .await
-            .map_err(DatafeedError::DatafeedHttpError)
+        Self::download_json(
+            &self.client,
+            status.data.v3.first().ok_or(DatafeedError::NoUrlError())?,
+        )
+        .await
+        .map_err(DatafeedError::DatafeedHttpError)
     }
 
     async fn get_or_update_status<'a>(

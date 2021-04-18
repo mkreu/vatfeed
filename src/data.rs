@@ -47,7 +47,6 @@ pub struct Flightplan {
     pub arrival: String,
 }
 
-
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Controller {
     pub cid: usize,

@@ -13,29 +13,29 @@ pub struct Datafeed {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct General {
-    pub version: usize,
-    pub reload: usize,
+    pub version: isize,
+    pub reload: isize,
     pub update: String,
     pub update_timestamp: DateTime<Utc>,
-    pub connected_clients: usize,
-    pub unique_users: usize,
+    pub connected_clients: isize,
+    pub unique_users: isize,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Pilot {
-    pub cid: usize,
+    pub cid: isize,
     pub name: String,
     pub callsign: String,
     pub server: String,
-    pub pilot_rating: usize,
+    pub pilot_rating: isize,
     pub latitude: f64,
     pub longitude: f64,
-    pub altitude: usize,
-    pub groundspeed: usize,
+    pub altitude: isize,
+    pub groundspeed: isize,
     pub transponder: String,
-    pub heading: usize,
+    pub heading: isize,
     pub qnh_i_hg: f32,
-    pub qnh_mb: u32,
+    pub qnh_mb: isize,
     pub flight_plan: Option<Flightplan>,
     pub logon_time: DateTime<Utc>,
     pub last_updated: DateTime<Utc>,
@@ -49,14 +49,14 @@ pub struct Flightplan {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Controller {
-    pub cid: usize,
+    pub cid: isize,
     pub name: String,
     pub callsign: String,
     pub frequency: String,
-    pub facility: usize,
+    pub facility: isize,
     pub rating: isize,
     pub server: String,
-    pub visual_range: usize,
+    pub visual_range: isize,
     pub atis_code: Option<String>,
     pub text_atis: Option<Vec<String>>,
     pub last_updated: DateTime<Utc>,
@@ -69,12 +69,12 @@ pub struct Server {
     pub hostname_or_ip: String,
     pub location: String,
     pub name: String,
-    pub clients_connection_allowed: usize,
+    pub clients_connection_allowed: isize,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Prefile {
-    pub cid: usize,
+    pub cid: isize,
     pub name: String,
     pub callsign: String,
     pub flight_plan: Option<Flightplan>,

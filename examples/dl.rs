@@ -4,6 +4,12 @@ use vatfeed::*;
 async fn main() {
     println!(
         "{}",
-        serde_json::to_string(&Downloader::init().download().await.unwrap()).unwrap()
+        serde_json::to_string(
+            &Downloader::with_status_file("status.json".into())
+                .download()
+                .await
+                .unwrap()
+        )
+        .unwrap()
     );
 }
